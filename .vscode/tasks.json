@@ -1,0 +1,18 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "cmake.build",
+        "type": "shell",
+        "command": "cmake --build ${workspaceFolder}/build --config Debug",
+        "options": {
+          "cwd": "${workspaceFolder}"
+        },
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "problemMatcher": []
+      }
+    ]
+  }
