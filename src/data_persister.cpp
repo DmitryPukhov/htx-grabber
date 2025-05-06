@@ -37,7 +37,6 @@ void DataPersister::persist( const string &ticker, const string &kind,vector<Jso
     // Go through jsons, write to daily file stream, or open a new stream if new day comes.
     for (Json::Value jsonValue : data)
     {
-        //cout << jsonValue << endl;
         tm curTime = getTime(jsonValue);
         if (curTime.tm_yday != curDayTime.tm_yday || curTime.tm_year != curDayTime.tm_year)
         {
@@ -51,19 +50,7 @@ void DataPersister::persist( const string &ticker, const string &kind,vector<Jso
         Json::FastWriter writer;
         writer.omitEndingLineFeed(); // Remove final newline
         dailyFileStream << writer.write(jsonValue) << endl;
-        //dailyFileStream << jsonValue << endl;
-        // // Write json values to comma separated csv line
-        // auto members = jsonValue.getMemberNames();
-        // for (size_t i = 0; i < members.size(); ++i)
-        // {
-        //     auto value = jsonValue[members[i]];
-        //     dailyFileStream << value;
-        //     if (i != members.size() - 1)
-        //         dailyFileStream << ",";
-        // }
-
-        //dailyFileStream << "\n";
-    }
+     }
 }
 
 ofstream DataPersister::startNewFileStream(const string &topic, const string &ticket, const tm &dayTime, Json::Value jsonValue)
@@ -73,15 +60,6 @@ ofstream DataPersister::startNewFileStream(const string &topic, const string &ti
     cout << "Persist the data to " << dailyFilePath << endl;
     ofstream dailyFileStream = ofstream{dailyFilePath};
 
-    // // Write csv headers
-    // auto members = jsonValue.getMemberNames();
-    // for (size_t i = 0; i < members.size(); ++i)
-    // {
-    //     dailyFileStream << members[i];
-    //     if (i != members.size() - 1)
-    //         dailyFileStream << ",";
-    // }
-    // dailyFileStream << "\n";
     return dailyFileStream;
 }
 
@@ -103,7 +81,7 @@ string DataPersister::buildFilePath(const string &topic, const string &ticket, c
     std::string dateStr = dateStream.str();
 
     // Construct the file path
-    const string EXTENSION = ".csv";
+    const string EXTENSION = ".json";
     std::ostringstream pathStream;
     pathStream << m_dirRaw << "/"
                << ticket << "/"

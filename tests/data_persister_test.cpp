@@ -98,7 +98,7 @@ TEST_F(DataPersisterTest, buildfilePath)
     std::string filePath = persister.buildFilePath("depth.step0", "BTC-USDT", time);
 
     // Assert
-    assert(filePath == "rootdir/BTC-USDT/2025-05-04_BTC-USDT_depth.step0.csv"); // Replaces BOOST_CHECK_EQUAL
+    assert(filePath == "rootdir/BTC-USDT/2025-05-04_BTC-USDT_depth.step0.json"); // Replaces BOOST_CHECK_EQUAL
 }
 
 TEST_F(DataPersisterTest, WriteAndReadFile)
@@ -148,7 +148,7 @@ TEST_F(DataPersisterTest, persistShouldSplitByDays)
     dataPersister.persist("BTC-USDT", "level2", jsons);
 
     // First day file
-    fs::path filePath = temp_dir / fs::path("BTC-USDT") / fs::path("2025-05-04_BTC-USDT_level2.csv");
+    fs::path filePath = temp_dir / fs::path("BTC-USDT") / fs::path("2025-05-04_BTC-USDT_level2.json");
     ASSERT_TRUE(fs::exists(filePath));
     ifstream fileStream(filePath);
     // These jsons should present in saved file
@@ -168,7 +168,7 @@ TEST_F(DataPersisterTest, persistShouldSplitByDays)
 
 
     // Second day file
-    filePath = temp_dir / fs::path("BTC-USDT") / fs::path("2025-05-05_BTC-USDT_level2.csv");
+    filePath = temp_dir / fs::path("BTC-USDT") / fs::path("2025-05-05_BTC-USDT_level2.json");
     fileStream = ifstream(filePath);
     ASSERT_TRUE(fs::exists(filePath));
 
