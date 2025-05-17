@@ -88,6 +88,11 @@
         "queue": "cpp",
         "stack": "cpp"
     },
+  "C_Cpp.default.includePath": [
+        "${workspaceFolder}/src",
+        "${workspaceFolder}/include"
+    ],
+    "cmake.configureOnOpen": true,    
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
     "testMate.cpp.test.advancedExecutables": [
         {

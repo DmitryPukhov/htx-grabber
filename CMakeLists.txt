@@ -16,7 +16,12 @@ file(GLOB_RECURSE SOURCES "src/*.cpp")
 
 # (Optional) Main executable (exclude if you only want tests)
 add_executable(main_app ${SOURCES})
+target_include_directories(main_app PRIVATE 
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
 target_include_directories(main_app PRIVATE include)
+target_include_directories(main_app PRIVATE ${WORKSPACE_ROOT_DIR}/src)
+
 target_link_libraries(main_app PRIVATE jsoncpp_lib ssl crypto z Boost::system Threads::Threads)
 
 # Create object library of main app sources
