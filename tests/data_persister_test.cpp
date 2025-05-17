@@ -70,7 +70,7 @@ TEST_F(DataPersisterTest, getTime)
     DataPersister persister("");
     Json::Value jsonValue;
     // Tue May 06 2025 06:25:27.354
-    jsonValue["ts"] = 1746512727354L;
+    jsonValue["ts"] = Json::Int64(1746512727354L);
 
     // call
     tm time = persister.getTime(jsonValue);
@@ -126,17 +126,17 @@ TEST_F(DataPersisterTest, WriteAndReadFile)
 TEST_F(DataPersisterTest, persistShouldSplitByDays)
 {
     Json::Value value1;
-    value1["ts"] = DataPersisterTest::to_millis("2025-05-04 00:00:00");
+    value1["ts"] = Json::Int64(DataPersisterTest::to_millis("2025-05-04 00:00:00"));
     value1["bid"] = 1;
     value1["volume"] = 10;
 
     Json::Value value2;
-    value2["ts"] = DataPersisterTest::to_millis("2025-05-04 23:59:59");
+    value2["ts"] = Json::Int64(DataPersisterTest::to_millis("2025-05-04 23:59:59"));
     value2["bid"] = 2;
     value2["volume"] = 20;
 
     Json::Value value3;
-    value3["ts"] = DataPersisterTest::to_millis("2025-05-05 00:00:00");
+    value3["ts"] = Json::Int64(DataPersisterTest::to_millis("2025-05-05 00:00:00"));
     value3["bid"] = 3;
     value3["volume"] = 30;
 

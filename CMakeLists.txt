@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Find dependencies
-find_package(Boost REQUIRED COMPONENTS unit_test_framework)
+find_package(Boost REQUIRED COMPONENTS unit_test_framework system)
 find_package(jsoncpp REQUIRED)
 
 # Recursively find all source files
@@ -17,7 +17,7 @@ file(GLOB_RECURSE SOURCES "src/*.cpp")
 # (Optional) Main executable (exclude if you only want tests)
 add_executable(main_app ${SOURCES})
 target_include_directories(main_app PRIVATE include)
-target_link_libraries(main_app PRIVATE JsonCpp::JsonCpp ssl crypto z)
+target_link_libraries(main_app PRIVATE jsoncpp_lib ssl crypto z Boost::system Threads::Threads)
 
 # Create object library of main app sources
 add_library(app_lib STATIC
@@ -56,9 +56,9 @@ target_link_libraries(tests
     app_lib
     GTest::GTest
     GTest::Main
-    JsonCpp::JsonCpp
+    jsoncpp_lib
 
-    ssl crypto z
+    ssl crypto z Boost::system Threads::Threads
 )
 target_include_directories(tests PRIVATE include)
 
